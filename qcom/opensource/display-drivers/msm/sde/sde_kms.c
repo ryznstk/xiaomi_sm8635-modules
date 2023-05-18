@@ -1053,9 +1053,9 @@ static void _sde_kms_drm_check_dpms(struct drm_atomic_state *old_state,
 		}
 
 #ifdef MI_DISPLAY_MODIFY
-		if ((old_mode != new_mode) || ((old_fps != new_fps) && (old_fps != 0))) {
+		if (old_mode != new_mode) {
 #else
-		if ((old_mode != new_mode) || (old_fps != new_fps)) {
+		if (old_mode != new_mode) {
 #endif
 			c_conn = to_sde_connector(connector);
 			SDE_EVT32(old_mode, new_mode, old_fps, new_fps,
