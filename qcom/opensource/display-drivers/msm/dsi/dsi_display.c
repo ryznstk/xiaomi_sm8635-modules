@@ -1507,7 +1507,8 @@ int dsi_display_set_power(struct drm_connector *connector,
 			/* Because N1/N2 exit AOD mode, the TE will be 120HZ */
 			if(mi_get_panel_id_by_dsi_panel(display->panel) == N2_PANEL_PA
 			|| mi_get_panel_id_by_dsi_panel(display->panel) == N1_PANEL_PA)
-				rc = dsi_panel_switch(display->panel);
+		rc = dsi_panel_post_switch(display->panel);
+
 		}
 #else
 		if ((display->panel->power_mode == SDE_MODE_DPMS_LP1) ||
@@ -9171,7 +9172,7 @@ int dsi_display_enable(struct dsi_display *display)
 	mode = display->panel->cur_mode;
 
 	if (mode->dsi_mode_flags & DSI_MODE_FLAG_DMS) {
-		rc = dsi_panel_post_switch(display->panel);
+		rc = dsi_panel_switch(display->panel);
 		if (rc) {
 			DSI_ERR("[%s] failed to switch DSI panel mode, rc=%d\n",
 				   display->name, rc);
@@ -9231,7 +9232,8 @@ int dsi_display_enable(struct dsi_display *display)
 			mode->mi_timing.ddic_min_refresh_rate);
 		SDE_ATRACE_BEGIN(trace_buf);
 #endif
-		rc = dsi_panel_switch(display->panel);
+		rc = dsi_panel_post_switch(display->panel);
+
 #ifdef MI_DISPLAY_MODIFY
 		SDE_ATRACE_END(trace_buf);
 #endif
