@@ -662,7 +662,7 @@ static void complete_commit(struct msm_commit *c)
 
 static void _msm_drm_commit_work_cb(struct kthread_work *work)
 {
-	struct msm_commit *commit = container_of(work, typeof(*ccommit),
+	struct msm_commit *commit = container_of(work, typeof(*commit),
 						 commit_work);
 
 	SDE_ATRACE_BEGIN("complete_commit");
